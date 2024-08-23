@@ -38,15 +38,15 @@ foreach ($itens as $item) {
             <div class="col s12">
                 <table>
                     <tbody>
-                        <?php $count = 1;
+                        <?php $count = 0;
                         foreach ($directories as $directory) { ?>
                             <tr>
-                                <td id="folder_<?= $count++ ?>"><a href="<?= $directory["name"] ?>"><i
+                                <td id="folder_<?= ++$count ?>" class="folder" data-id="<?= $count ?>"><a href="<?= $directory["name"] ?>"><i
                                             class="material-icons">folder_open</i>
                                         <?= $directory["name"] ?></a></td>
                             </tr>
                             <?php foreach ($directory["subitens"] as $files) { ?>
-                                <tr class="hide folder_<?= $count++ ?>">
+                                <tr class="hide folder_<?= $count ?>">
                                     <td><a style="margin-left: 50px;" href="<?= $files["path"] ?>"><?= $files["name"] ?></a>
                                     </td>
                                 </tr>
@@ -61,7 +61,23 @@ foreach ($itens as $item) {
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
-        
+        window.addEventListener('load',()=>{
+            const folders = document.querySelectorAll('.folder');
+
+            for(const folder of folders){
+                folder.addEventListener('click',function(){
+                    const id = this.dataset.id;
+                    const files = document.querySelectorAll('.folder_'+id);
+                    for(const file of files){
+                        if(file.classList.contains('hide')){
+                        file.classList.remove('hide');
+                        }else{
+                            file.classList.add('hide');
+                        }
+                    }
+                });
+            }
+        })
     </script>
 </body>
 
