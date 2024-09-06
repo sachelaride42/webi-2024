@@ -1,0 +1,17 @@
+{
+    "name": "felipe/composer",
+    "require": {
+        "symfony/string": "^7.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Felipe\\Composer\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "felipepperez",
+            "email": "fpproducoes@gmail.com"
+        }
+    ]
+}
