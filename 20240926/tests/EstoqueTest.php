@@ -97,7 +97,11 @@ class EstoqueTest extends TestCase
 
     $this->estoque->adicionarProduto($produto);
     $this->estoque->removerProduto('Impressora');
-    $this->assertEmpty($this->estoque->consultarProduto('Impressora'));
+
+    $this->expectException(\Exception::class);
+    $this->expectExceptionMessage('Produto não encontrado no estoque.');
+
+    $this->estoque->consultarProduto('Impressora');
   }
 
   public function testRemoverProdutoInexistente()
@@ -162,7 +166,7 @@ class EstoqueTest extends TestCase
     ];
 
     $this->estoque->adicionarProduto($produto);
-    
+
     $resultado = $this->estoque->consultarProduto('Cadeira Gamer');
     $this->assertEquals(2000.00, $resultado['valor_total']);
   }
