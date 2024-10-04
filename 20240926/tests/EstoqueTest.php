@@ -171,6 +171,22 @@ class EstoqueTest extends TestCase
     $this->assertEquals(2000.00, $resultado['valor_total']);
   }
 
+  public function testCalculoValorTotalDoProdutoDepoisDaAtualizacao()
+  {
+    $produto = [
+      'nome' => 'Cadeira Gamer',
+      'quantidade' => 4,
+      'preco' => 500.00
+    ];
+
+    $this->estoque->adicionarProduto($produto);
+
+    $this->estoque->atualizarQuantidade('Cadeira Gamer', -2);
+
+    $resultado = $this->estoque->consultarProduto('Cadeira Gamer');
+    $this->assertEquals(1000.00, $resultado['valor_total']);
+  }
+
   public function testAdicionarProdutoComPrecoInvalido()
   {
     $produto = [
